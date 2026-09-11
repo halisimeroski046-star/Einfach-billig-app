@@ -4,12 +4,19 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+
+      - name: System-Abhängigkeiten installieren
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+
       - uses: ArtemSBulgakov/buildozer-action@v1
         with:
           command: buildozer -v android debug
+
       - uses: actions/upload-artifact@v4
         with:
           name: einfach-billig-app-apk
