@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libffi-dev apt-utils libncurses5-dev libncursesw5-dev libreadline6-dev libsqlite3-dev libssl-dev libtk8.6-dev tk-dev cython3 openjdk-17-jdk zip unzip ffmpeg autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libreadline6-dev libsqlite3-dev libssl-dev libgdbm-dev libffi-dev python3-pip
+          sudo apt-get install -y build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libffi-dev apt-utils libncurses5-dev libncursesw5-dev openjdk-17-jdk zip unzip ffmpeg autoconf libtool pkg-config python3-pip
           pip install --upgrade buildozer cython
 
       - name: Create buildozer.spec
