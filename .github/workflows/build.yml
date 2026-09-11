@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ArtemSydoryk/buildozer-action@v1
+      - uses: ArtemSBulgakov/buildozer-action@v1
         with:
           command: buildozer -v android debug
       - uses: actions/upload-artifact@v4
