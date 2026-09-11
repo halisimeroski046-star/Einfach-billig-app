@@ -1,42 +1,16 @@
-name: Build Android APK
+name: Build Einfach Billig App
 
-on:
-  push:
-    branches: [ "main", "master" ]
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: ArtemSydoryk/buildozer-action@v1
         with:
-          python-version: '3.10'
-
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update || true
-          sudo apt-get install -y --fix-missing build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev liblzma-dev libreadline-dev libffi-dev openjdk-17-jdk zip unzip ffmpeg autoconf libtool pkg-config python3-pip
-          pip install --upgrade buildozer cython
-
-      - name: Create buildozer.spec
-        run: |
-          buildozer init
-          sed -i 's/^requirements = .*/requirements = python3,kivy,android,requests/' buildozer.spec
-          sed -i 's/^android.permissions = .*/android.permissions = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,INTERNET/' buildozer.spec
-          sed -i 's/^# android.accept_sdk_license = .*/android.accept_sdk_license = True/' buildozer.spec
-
-      - name: Build APK
-        run: |
-          yes | buildozer -v android debug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+          command: buildozer -v android debug
+      - uses: actions/upload-artifact@v4
         with:
-          name: Einfach-Billig-App
+          name: einfach-billig-app-apk
           path: bin/*.apk
